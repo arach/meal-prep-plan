@@ -117,7 +117,7 @@ export default function HomePage() {
                     <div
                       ref={provided.innerRef}
                       {...provided.droppableProps}
-                      className={`flex flex-col items-center min-h-[80px] rounded transition-colors ${snapshot.isDraggingOver ? 'bg-blue-50' : ''}`}
+                      className={`flex flex-col items-center min-h-[80px] rounded transition-colors ${snapshot.isDraggingOver ? 'bg-blue-50' : ''} snap-center`}
                     >
                       <div className="text-xs font-medium text-gray-500 mb-1">{day.slice(0,3)}</div>
                       {dayToEvents[day].map((event, i) => (
@@ -127,7 +127,14 @@ export default function HomePage() {
                               ref={dragProvided.innerRef}
                               {...dragProvided.draggableProps}
                               {...dragProvided.dragHandleProps}
-                              className={`bg-blue-50 border border-blue-200 rounded-md px-2 py-1 flex flex-col items-center text-xs transition-shadow ${dragSnapshot.isDragging ? 'shadow-lg' : ''}`}
+                              className={`bg-blue-50 border border-blue-200 rounded-md px-2 py-1 flex flex-col items-center text-xs ${dragSnapshot.isDragging ? 'shadow-lg' : ''} snap-center`}
+                              style={{
+                                ...dragProvided.draggableProps.style,
+                                transition: dragSnapshot.isDropAnimating ? 'transform 10ms ease' : undefined,
+                                transform: dragSnapshot.isDragging
+                                  ? dragProvided.draggableProps.style?.transform
+                                  : 'translate(0, 0)',
+                              }}
                             >
                               <span className="text-lg mb-0.5">{event.emoji}</span>
                               <span className="font-semibold text-blue-700">{event.label}</span>
