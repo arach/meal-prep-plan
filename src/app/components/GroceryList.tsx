@@ -26,21 +26,22 @@ export default function GroceryList({ selectedMeals }: GroceryListProps) {
     ? selectedMeals.map(id => (
         <span key={id} className="text-2xl mr-1 align-middle">{recipeEmoji[id]}</span>
       ))
-    : <span className="text-2xl text-gray-200">🥜🥜🥜</span>;
+    : <span className="text-sm text-gray-200">🥜🥜🥜</span>;
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6 w-full max-w-xl flex flex-col items-start">
+    <div className="bg-white rounded-lg shadow-sm p-6 w-full max-w-xl flex flex-col items-start print:shadow-none print:border print:rounded-none print:bg-white print:max-w-full print:w-full">
       <h2 className="text-2xl font-semibold mb-6 pb-2 border-b flex items-center gap-2 w-full">
         <span>🛒</span> Grocery List
       </h2>
 
-      {/* Emoji row as section header, aligned with Meal Rotation title */}
-      <div className="flex items-center mb-3 min-h-[2.5rem]">
-        {emojiRow}
-      </div>
+    
 
       {/* Grocery List */}
       <div className="w-full">
+        {/* Emoji row inside white section */}
+        <div className="flex items-center mb-6 w-full">
+          {emojiRow}
+        </div>
         {selectedIngredients.length > 0 ? (
           <ul className="space-y-1 bg-gray-50 border border-gray-200 rounded-lg p-2 shadow-sm">
             {selectedIngredients.map((ingredient, index) => (

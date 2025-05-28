@@ -13,6 +13,7 @@ export default function RecipeCard({ recipe, tight, active, onClick }: RecipeCar
       className={`bg-gray-50 rounded-lg border shadow-sm transition-colors cursor-pointer select-none
         ${tight ? 'space-y-2 p-3' : 'space-y-4 p-4'}
         ${active ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200' : 'border-gray-200 hover:border-blue-300'}
+        ${!active ? 'print:hidden' : ''}
       `}
       onClick={onClick}
       tabIndex={0}
@@ -53,6 +54,17 @@ export default function RecipeCard({ recipe, tight, active, onClick }: RecipeCar
         {recipe.cookingTime.temperature && (
           <p>Temperature: {recipe.cookingTime.temperature}</p>
         )}
+      </div>
+
+      {/* Nutrition Info */}
+      <div className="mt-2 p-2 rounded bg-white/80 border border-gray-200 flex flex-col items-start text-xs font-mono text-gray-700">
+        <span className="font-semibold text-gray-900 mb-1">Nutrition (per serving):</span>
+        <div className="flex flex-wrap gap-4">
+          <span>🔥 {recipe.nutrition.calories} kcal</span>
+          <span>🥩 {recipe.nutrition.protein}g protein</span>
+          <span>🍚 {recipe.nutrition.carbs}g carbs</span>
+          <span>🧈 {recipe.nutrition.fats}g fats</span>
+        </div>
       </div>
     </div>
   );

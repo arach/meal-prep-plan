@@ -25,6 +25,12 @@ export const mealRotation: MealRotation = {
         temperature: '425°F',
         duration: '18-22 minutes',
       },
+      nutrition: {
+        calories: 450,
+        protein: 60,
+        carbs: 8,
+        fats: 18,
+      },
     },
     {
       id: 'vegetarian-bowl',
@@ -47,6 +53,12 @@ export const mealRotation: MealRotation = {
       ],
       cookingTime: {
         duration: '30-40 minutes',
+      },
+      nutrition: {
+        calories: 520,
+        protein: 18,
+        carbs: 85,
+        fats: 14,
       },
     },
     {
@@ -72,6 +84,12 @@ export const mealRotation: MealRotation = {
       ],
       cookingTime: {
         duration: '15–30 minutes depending on protein',
+      },
+      nutrition: {
+        calories: 600,
+        protein: 45,
+        carbs: 60,
+        fats: 22,
       },
     }
   ],

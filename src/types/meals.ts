@@ -4,6 +4,13 @@ export interface Ingredient {
   unit?: string;
 }
 
+export interface NutritionInfo {
+  calories: number;
+  protein: number; // grams
+  carbs: number;   // grams
+  fats: number;    // grams
+}
+
 export interface Recipe {
   id: string;
   name: string;
@@ -15,6 +22,7 @@ export interface Recipe {
     temperature?: string;
     duration: string;
   };
+  nutrition: NutritionInfo;
 }
 
 export interface MealRotation {
