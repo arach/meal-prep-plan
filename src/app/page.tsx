@@ -17,10 +17,10 @@ const initialPrepEvents = [
 const PrintButton = () => (
   <button
     onClick={() => window.print()}
-    className="print:hidden fixed top-4 right-4 z-50 bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition"
+    className="print:hidden fixed bottom-4 right-4 z-50 bg-blue-600 text-white px-3 py-1 rounded-full shadow hover:bg-blue-700 transition text-sm"
     aria-label="Print or Export to PDF"
   >
-    🖨️ Print / Export PDF
+    🖨️ Print
   </button>
 );
 
@@ -99,6 +99,7 @@ export default function HomePage() {
               {/* Grocery List Card aligned and always top-aligned */}
               <div className="w-full max-w-xl lg:w-[22rem] flex flex-col items-start gap-4 mt-4 lg:mt-0 print:max-w-full print:w-full">
                 <GroceryList selectedMeals={selectedMeals} />
+                <PrintButton />
               </div>
             </div>
           </div>
