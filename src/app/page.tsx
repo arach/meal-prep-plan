@@ -6,6 +6,8 @@ import RecipeAssignment from './components/RecipeAssignment';
 import { mealPlan } from '@/data/meals';
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { PrepDay } from '@/types/meals';
+import Modal from './components/Modal';
+import { MdEdit } from "react-icons/md";
 
 const weekDays = [
   'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
@@ -39,6 +41,7 @@ export default function HomePage() {
   });
   // Keep prepDays in state for recipe assignment UI
   const [prepDays, setPrepDays] = useState(mealPlan.prepDays);
+  const [isAssignmentModalOpen, setAssignmentModalOpen] = useState(false);
 
   // Helper to get prepDay by id
   const getPrepDay = (id: string | null) => prepDays.find(pd => pd.id === id);
@@ -199,75 +202,93 @@ export default function HomePage() {
               {/* Grocery List Card aligned and always top-aligned */}
               <div className="w-full max-w-xl lg:w-[22rem] flex flex-col items-start gap-4 mt-4 lg:mt-0 print:max-w-full print:w-full">
                 <GroceryList selectedMeals={selectedMeals} />
-                {/* Meal Assignment Section as a card below Grocery List */}
-                <div className="w-full bg-white rounded-lg shadow-sm p-6 mt-4">
-                  <div className="flex items-center gap-2 mb-4 pb-2 border-b w-full border-gray-200">
-                    <span className="text-2xl">🍽️</span>
-                    <h2 className="text-lg font-semibold">Meal Assignment</h2>
-                  </div>
-                  <RecipeAssignment
-                    recipes={mealPlan.recipes}
-                    prepDays={prepDays}
-                    onAssignRecipe={handleAssignRecipe}
-                    onUnassignRecipe={handleUnassignRecipe}
-                  />
-                </div>
               </div>
             </div>
           </div>
         </div>
         {/* Cooking Schedule Section */}
         <div className="w-full bg-white rounded-lg shadow-sm p-6">
-          <div className="flex items-center gap-2 mb-6 pb-2 border-b w-full border-gray-200">
+          <div className="flex items-center gap-1 mb-2 pb-2 border-b border-gray-200">
             <span className="text-2xl">📅</span>
-            <h2 className="text-xl font-semibold">Cooking Schedule</h2>
+            <h2 className="text-xl font-semibold font-tech">Cooking Schedule</h2>
+            <button
+              className="ml-1 p-1 rounded-full border border-gray-300 hover:bg-gray-100 transition align-middle"
+              onClick={() => setAssignmentModalOpen(true)}
+              aria-label="Edit meal assignment"
+              style={{ lineHeight: 0 }}
+            >
+              <MdEdit size={22} />
+            </button>
           </div>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <div className="grid grid-cols-7 gap-2 print:grid-cols-7 print:gap-1">
-              {weekDays.map((day) => (
-                <Droppable droppableId={day} key={day}>
-                  {(provided, snapshot) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      className={`flex flex-col items-center min-h-[120px] rounded transition-colors ${snapshot.isDraggingOver ? 'bg-blue-50' : ''} snap-center`}
-                    >
-                      <div className="text-xs font-medium text-gray-500 mb-1">{day.slice(0,3)}</div>
-                      {dayAssignments[day] && (
-                        <Draggable draggableId={dayAssignments[day]!} index={0} key={dayAssignments[day]!}>
-                          {(dragProvided, dragSnapshot) => {
-                            const prepDay = getPrepDay(dayAssignments[day]);
-                            if (!prepDay) return null;
-                            return (
-                              <div
-                                ref={dragProvided.innerRef}
-                                {...dragProvided.draggableProps}
-                                {...dragProvided.dragHandleProps}
-                                className={`bg-blue-50 border border-blue-200 rounded-md px-3 py-2 flex flex-col items-center text-xs w-full mt-2 ${dragSnapshot.isDragging ? 'shadow-lg' : ''} snap-center`}
-                              >
-                                <span className="font-semibold text-blue-700 mb-1">{prepDay.name}</span>
-                                <div className="flex flex-wrap gap-1 justify-center">
-                                  {prepDay.recipes.map(rid => {
-                                    const recipe = mealPlan.recipes.find(r => r.id === rid);
-                                    return recipe ? (
-                                      <span key={rid} className="flex items-center gap-1 bg-white border rounded px-2 py-0.5 text-xs">
-                                        <span>{recipe.emoji}</span> <span>{recipe.name}</span>
-                                      </span>
-                                    ) : null;
-                                  })}
+          {/* Week View Card Header */}
+          <div className="flex items-center gap-2 px-2 py-1 bg-gray-100 border border-gray-200 rounded-t-lg font-semibold font-tech text-lg">
+            <span className="text-lg">🗓️</span>
+            <span>Week View</span>
+          </div>
+          {/* Calendar Grid Card (content) */}
+          <div className="bg-white border border-gray-200 border-t-0 rounded-b-lg shadow-sm p-2">
+            <DragDropContext onDragEnd={onDragEnd}>
+              <div className="grid grid-cols-7 gap-2 print:grid-cols-7 print:gap-1">
+                {weekDays.map((day) => (
+                  <Droppable droppableId={day} key={day}>
+                    {(provided, snapshot) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                        className={`flex flex-col items-center min-h-[120px] rounded-md border border-gray-100 bg-white p-1 transition-colors ${snapshot.isDraggingOver ? 'bg-blue-50' : ''} snap-center`}
+                      >
+                        <div className="text-xs font-semibold text-gray-600 mb-1">{day.slice(0,3)}</div>
+                        {dayAssignments[day] && (
+                          <Draggable draggableId={dayAssignments[day]!} index={0} key={dayAssignments[day]!}>
+                            {(dragProvided, dragSnapshot) => {
+                              const prepDay = getPrepDay(dayAssignments[day]);
+                              if (!prepDay) return null;
+                              return (
+                                <div
+                                  ref={dragProvided.innerRef}
+                                  {...dragProvided.draggableProps}
+                                  {...dragProvided.dragHandleProps}
+                                  className={`bg-blue-50 border border-blue-200 rounded-md px-3 py-2 flex flex-col items-center text-xs w-full mt-2 ${dragSnapshot.isDragging ? 'shadow-lg' : ''} snap-center`}
+                                >
+                                  <span className="font-semibold text-blue-700 mb-1">{prepDay.name}</span>
+                                  <div className="flex flex-wrap gap-1 justify-center">
+                                    {prepDay.recipes.map(rid => {
+                                      const recipe = mealPlan.recipes.find(r => r.id === rid);
+                                      return recipe ? (
+                                        <span key={rid} className="flex items-center gap-1 bg-white border rounded px-2 py-0.5 text-xs">
+                                          <span>{recipe.emoji}</span> <span>{recipe.name}</span>
+                                        </span>
+                                      ) : null;
+                                    })}
+                                  </div>
                                 </div>
-                              </div>
-                            );
-                          }}
-                        </Draggable>
-                      )}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              ))}
+                              );
+                            }}
+                          </Draggable>
+                        )}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                ))}
+              </div>
+            </DragDropContext>
+          </div>
+          <Modal
+            open={isAssignmentModalOpen}
+            onClose={() => setAssignmentModalOpen(false)}
+            title="🍽️ Edit Meal Assignment"
+          >
+            <div>
+              <div className="border-b border-gray-200 pb-2 mb-4" />
+              <RecipeAssignment
+                recipes={mealPlan.recipes}
+                prepDays={prepDays}
+                onAssignRecipe={handleAssignRecipe}
+                onUnassignRecipe={handleUnassignRecipe}
+              />
             </div>
-          </DragDropContext>
+          </Modal>
         </div>
       </div>
       {/* Print styles */}

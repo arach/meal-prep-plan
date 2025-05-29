@@ -4,7 +4,7 @@ export const mealPlan: MealPlan = {
   recipes: [
     {
       id: 'chicken-breast',
-      name: 'Chicken Breast',
+      name: 'Chicken',
       emoji: '🍗',
       ingredients: [
         { name: 'chicken breast', amount: '3', unit: 'lbs' },
@@ -33,7 +33,7 @@ export const mealPlan: MealPlan = {
     },
     {
       id: 'vegetarian-bowl',
-      name: 'Vegetarian Bowl',
+      name: 'Veggie Bowl',
       emoji: '🥗',
       ingredients: [
         { name: 'chickpeas', amount: '2', unit: 'cans' },
@@ -60,11 +60,11 @@ export const mealPlan: MealPlan = {
       },
     },
     {
-      id: 'fish-beef',
-      name: 'Fish or Beef',
+      id: 'fish',
+      name: 'Fish',
       emoji: '🥩',
       ingredients: [
-        { name: 'salmon or ground beef / steak', amount: '2', unit: 'lbs' },
+        { name: 'salmon', amount: '2', unit: 'lbs' },
         { name: 'couscous or rice', amount: '2', unit: 'cups' },
         { name: 'potatoes', amount: '4', unit: 'medium' },
         { name: 'spinach or mixed greens', amount: '1', unit: 'bag' },
@@ -72,9 +72,7 @@ export const mealPlan: MealPlan = {
         { name: 'fresh herbs (dill, parsley, oregano)', amount: '1', unit: 'bunch' },
       ],
       instructions: [
-        'Choose one protein: salmon or beef (ground/steak)',
         'Salmon: bake at 375°F for 12–15 minutes',
-        'Beef: sear or grill to desired doneness (internal temp 145°F+)',
         'Cook couscous or rice according to package instructions',
         'Boil or roast potatoes; steam or sauté greens',
         'Serve protein with chosen carbs and greens',

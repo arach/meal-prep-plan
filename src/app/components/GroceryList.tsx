@@ -44,12 +44,7 @@ export default function GroceryList({ selectedMeals }: GroceryListProps) {
           <p className="text-gray-500 italic">Select recipes to see ingredients</p>
         )}
       </div>
-      {/* One-liner summary of selected recipes */}
-      {selectedRecipeNames.length > 0 && (
-        <div className="mt-2 text-xs text-gray-500">
-          Recipes to cook: {selectedRecipeNames.join(', ')}
-        </div>
-      )}
+
     </div>
   );
 } 

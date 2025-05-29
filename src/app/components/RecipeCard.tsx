@@ -1,4 +1,5 @@
 import { Recipe } from '@/types/meals';
+import { LuCheck } from "react-icons/lu";
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -10,8 +11,8 @@ interface RecipeCardProps {
 export default function RecipeCard({ recipe, tight, active, onClick }: RecipeCardProps) {
   return (
     <div
-      className={`border border-gray-200 bg-white rounded-lg shadow-sm transition-colors cursor-pointer select-none font-tech
-        ${active ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200' : 'hover:border-blue-300'}
+      className={`border border-gray-200 bg-white rounded-lg shadow-sm overflow-hidden transition-colors cursor-pointer select-none font-tech
+        hover:border-blue-300
         ${!active ? 'print:hidden' : ''}
       `}
       onClick={onClick}
@@ -19,9 +20,16 @@ export default function RecipeCard({ recipe, tight, active, onClick }: RecipeCar
       role="button"
       aria-pressed={!!active}
     >
-      <div className="flex items-center gap-2 px-2 py-1 bg-gray-100 border-b border-gray-200">
+      <div className="flex items-center gap-2 px-2 py-1 bg-gray-100 relative">
         <span className="text-xl">{recipe.emoji}</span>
         <span className="font-semibold font-tech text-base text-gray-800">{recipe.name}</span>
+        <span className="ml-auto flex items-center">
+          <LuCheck
+            className={`transition-all duration-200 ease-in-out ${active ? 'scale-100 opacity-100 text-green-500' : 'scale-75 opacity-0'}`}
+            size={22}
+            aria-label={active ? 'Selected' : 'Not selected'}
+          />
+        </span>
       </div>
       
       <div className="px-4 py-3 space-y-4">
