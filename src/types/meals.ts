@@ -15,7 +15,6 @@ export interface Recipe {
   id: string;
   name: string;
   emoji: string;
-  schedule: string;
   ingredients: Ingredient[];
   instructions: string[];
   cookingTime: {
@@ -25,6 +24,14 @@ export interface Recipe {
   nutrition: NutritionInfo;
 }
 
-export interface MealRotation {
+export interface PrepDay {
+  id: string;
+  name: string;  // e.g., "Prep Day 1"
+  recipes: string[];  // Array of recipe IDs
+  order: number;  // For drag-and-drop reordering
+}
+
+export interface MealPlan {
   recipes: Recipe[];
+  prepDays: PrepDay[];
 } 

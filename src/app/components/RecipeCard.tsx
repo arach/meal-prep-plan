@@ -10,9 +10,8 @@ interface RecipeCardProps {
 export default function RecipeCard({ recipe, tight, active, onClick }: RecipeCardProps) {
   return (
     <div
-      className={`bg-gray-50 rounded-lg border shadow-sm transition-colors cursor-pointer select-none
-        ${tight ? 'space-y-2 p-3' : 'space-y-4 p-4'}
-        ${active ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200' : 'border-gray-200 hover:border-blue-300'}
+      className={`border border-gray-200 bg-white rounded-lg shadow-sm transition-colors cursor-pointer select-none font-tech
+        ${active ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200' : 'hover:border-blue-300'}
         ${!active ? 'print:hidden' : ''}
       `}
       onClick={onClick}
@@ -20,50 +19,45 @@ export default function RecipeCard({ recipe, tight, active, onClick }: RecipeCar
       role="button"
       aria-pressed={!!active}
     >
-      <h3 className={`text-lg font-medium flex items-center gap-2 ${tight ? 'mb-1' : ''}`}>
-        <span>{recipe.emoji}</span> {recipe.name}
-      </h3>
-      <p className="text-sm text-gray-600">{recipe.schedule}</p>
+      <div className="flex items-center gap-2 px-2 py-1 bg-gray-100 border-b border-gray-200">
+        <span className="text-xl">{recipe.emoji}</span>
+        <span className="font-semibold font-tech text-base text-gray-800">{recipe.name}</span>
+      </div>
       
-      <div className={tight ? 'space-y-1' : 'space-y-2'}>
-        <h4 className="font-medium text-sm">Ingredients:</h4>
-        <ul className={`text-sm ${tight ? 'space-y-1' : 'space-y-2'}`}>
-          {recipe.ingredients.map((ingredient, index) => (
-            <li key={index} className="flex items-start gap-2 font-mono text-xs text-gray-800">
-              <span>•</span>
-              <span className="font-mono">{ingredient.amount}{ingredient.unit ? ` ${ingredient.unit}` : ''} {ingredient.name}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <div className="px-4 py-3 space-y-4">
+        <div className={tight ? 'space-y-1' : 'space-y-2'}>
+          <h4 className="font-medium text-sm">Ingredients:</h4>
+          <ul className={`text-sm ${tight ? 'space-y-1' : 'space-y-2'}`}>
+            {recipe.ingredients.map((ingredient, index) => (
+              <li key={index} className="flex items-start gap-2 font-mono text-xs text-gray-800">
+                <span>•</span>
+                <span className="font-mono">{ingredient.amount}{ingredient.unit ? ` ${ingredient.unit}` : ''} {ingredient.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <div className={tight ? 'space-y-1' : 'space-y-2'}>
-        <h4 className="font-medium text-sm">Instructions:</h4>
-        <ul className={`text-sm ${tight ? 'space-y-1' : 'space-y-2'}`}>
-          {recipe.instructions.map((instruction, index) => (
-            <li key={index} className="flex items-start gap-2 font-mono text-xs text-gray-800">
-              <span>•</span>
-              <span className="font-mono">{instruction}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+        <div className={tight ? 'space-y-1' : 'space-y-2'}>
+          <h4 className="font-medium text-sm">Instructions:</h4>
+          <ul className={`text-sm ${tight ? 'space-y-1' : 'space-y-2'}`}>
+            {recipe.instructions.map((instruction, index) => (
+              <li key={index} className="flex items-start gap-2 font-mono text-xs text-gray-800">
+                <span>•</span>
+                <span className="font-mono">{instruction}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <div className="text-sm text-gray-600">
-        <p>Cooking Time: {recipe.cookingTime.duration}</p>
-        {recipe.cookingTime.temperature && (
-          <p>Temperature: {recipe.cookingTime.temperature}</p>
-        )}
-      </div>
-
-      {/* Nutrition Info */}
-      <div className="mt-2 p-2 rounded bg-white/80 border border-gray-200 flex flex-col items-start text-xs font-mono text-gray-700">
-        <span className="font-semibold text-gray-900 mb-1">Nutrition (per serving):</span>
-        <div className="flex flex-wrap gap-4">
-          <span>🔥 {recipe.nutrition.calories} kcal</span>
-          <span>🥩 {recipe.nutrition.protein}g protein</span>
-          <span>🍚 {recipe.nutrition.carbs}g carbs</span>
-          <span>🧈 {recipe.nutrition.fats}g fats</span>
+        {/* Nutrition Info */}
+        <div className="mt-2 p-2 rounded bg-white/80 border border-gray-200 flex flex-col items-start text-xs font-mono text-gray-700">
+          <span className="font-semibold text-gray-900 mb-1">Nutrition (per serving):</span>
+          <div className="flex flex-wrap gap-4">
+            <span>🔥 {recipe.nutrition.calories} kcal</span>
+            <span>🥩 {recipe.nutrition.protein}g protein</span>
+            <span>🍚 {recipe.nutrition.carbs}g carbs</span>
+            <span>🧈 {recipe.nutrition.fats}g fats</span>
+          </div>
         </div>
       </div>
     </div>

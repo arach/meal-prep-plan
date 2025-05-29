@@ -1,12 +1,11 @@
-import { MealRotation } from '@/types/meals';
+import { MealPlan } from '@/types/meals';
 
-export const mealRotation: MealRotation = {
+export const mealPlan: MealPlan = {
   recipes: [
     {
       id: 'chicken-breast',
       name: 'Chicken Breast',
       emoji: '🍗',
-      schedule: 'Monday–Wednesday',
       ingredients: [
         { name: 'chicken breast', amount: '3', unit: 'lbs' },
         { name: 'lemon', amount: '2' },
@@ -36,7 +35,6 @@ export const mealRotation: MealRotation = {
       id: 'vegetarian-bowl',
       name: 'Vegetarian Bowl',
       emoji: '🥗',
-      schedule: 'Thursday–Saturday (Alt)',
       ingredients: [
         { name: 'chickpeas', amount: '2', unit: 'cans' },
         { name: 'quinoa', amount: '2', unit: 'cups' },
@@ -65,7 +63,6 @@ export const mealRotation: MealRotation = {
       id: 'fish-beef',
       name: 'Fish or Beef',
       emoji: '🥩',
-      schedule: 'Thursday–Saturday (Alt)',
       ingredients: [
         { name: 'salmon or ground beef / steak', amount: '2', unit: 'lbs' },
         { name: 'couscous or rice', amount: '2', unit: 'cups' },
@@ -93,6 +90,20 @@ export const mealRotation: MealRotation = {
       },
     }
   ],
+  prepDays: [
+    {
+      id: 'prep-day-1',
+      name: 'Prep Day 1',
+      recipes: ['chicken-breast'],
+      order: 0,
+    },
+    {
+      id: 'prep-day-2',
+      name: 'Prep Day 2',
+      recipes: ['vegetarian-bowl', 'fish-beef'],
+      order: 3,
+    }
+  ]
 };
 
 export const groceryRecipes = [
