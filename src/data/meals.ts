@@ -62,7 +62,7 @@ export const mealPlan: MealPlan = {
     {
       id: 'fish',
       name: 'Fish',
-      emoji: '🥩',
+      emoji: '🐟',
       ingredients: [
         { name: 'salmon', amount: '2', unit: 'lbs' },
         { name: 'couscous or rice', amount: '2', unit: 'cups' },

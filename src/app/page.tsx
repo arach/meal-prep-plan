@@ -173,12 +173,12 @@ export default function HomePage() {
         {/* Meal Rotation and Grocery List */}
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-10">
           <div className="flex-1 min-w-0">
-            <h1 className="text-3xl font-bold mb-2">Weekly Meal Prep Plan</h1>
-            <p className="text-gray-600 mb-8">A simple, efficient approach to meal preparation</p>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-2 font-sans">Weekly Meal Prep Plan</h1>
+            <p className="text-base leading-normal font-sans text-gray-600 mb-8">A simple, efficient approach to meal preparation</p>
             {/* Meal Rotation Main Event - header aligned horizontally with Grocery List */}
             <div className="flex flex-col lg:flex-row lg:items-start lg:gap-8">
               <section className="flex-1 mb-8 lg:mb-0 bg-white rounded-lg shadow-sm p-4 print:shadow-none print:border print:rounded-none print:bg-white">
-                <h2 className="text-2xl font-semibold font-tech mb-4 pb-2 border-b flex items-center gap-2 w-full">
+                <h2 className="text-2xl font-semibold tracking-tight mb-4 pb-2 border-b flex items-center gap-2 w-full font-sans">
                   <span className="text-2xl">🧑‍🍳</span> Meal Rotation
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -200,7 +200,7 @@ export default function HomePage() {
                 </div>
               </section>
               {/* Grocery List Card aligned and always top-aligned */}
-              <div className="w-full max-w-xl lg:w-[22rem] flex flex-col items-start gap-4 mt-4 lg:mt-0 print:max-w-full print:w-full">
+              <div className="w-full max-w-xl lg:w-[22rem] flex flex-col items-start gap-4 mt-4 lg:mt-0 print:max-w-full print:w-full font-sans">
                 <GroceryList selectedMeals={selectedMeals} />
               </div>
             </div>
@@ -210,7 +210,7 @@ export default function HomePage() {
         <div className="w-full bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center gap-1 mb-2 pb-2 border-b border-gray-200">
             <span className="text-2xl">📅</span>
-            <h2 className="text-xl font-semibold font-tech">Cooking Schedule</h2>
+            <h2 className="text-2xl font-semibold tracking-tight font-sans">Cooking Schedule</h2>
             <button
               className="ml-1 p-1 rounded-full border border-gray-300 hover:bg-gray-100 transition align-middle"
               onClick={() => setAssignmentModalOpen(true)}
@@ -221,7 +221,7 @@ export default function HomePage() {
             </button>
           </div>
           {/* Week View Card Header */}
-          <div className="flex items-center gap-2 px-2 py-1 bg-gray-100 border border-gray-200 rounded-t-lg font-semibold font-tech text-lg">
+          <div className="flex items-center gap-2 px-2 py-1 bg-gray-100 border border-gray-200 rounded-t-lg font-semibold text-lg font-sans">
             <span className="text-lg">🗓️</span>
             <span>Week View</span>
           </div>
@@ -286,6 +286,7 @@ export default function HomePage() {
                 prepDays={prepDays}
                 onAssignRecipe={handleAssignRecipe}
                 onUnassignRecipe={handleUnassignRecipe}
+                onSwapRecipes={handleSwapRecipes}
               />
             </div>
           </Modal>

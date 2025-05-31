@@ -25,7 +25,13 @@ export default function Modal({ open, onClose, children, title }: ModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
       <div
-        className="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative"
+        className="fixed inset-0 z-40"
+        onMouseDown={e => {
+          if (e.target === e.currentTarget) onClose();
+        }}
+      />
+      <div
+        className="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative z-50"
         role="dialog"
         aria-modal="true"
         aria-label={title || 'Modal'}
@@ -49,8 +55,6 @@ export default function Modal({ open, onClose, children, title }: ModalProps) {
         </button>
         {children}
       </div>
-      {/* Backdrop click closes modal */}
-      <div className="fixed inset-0" onClick={onClose} />
     </div>
   );
 }

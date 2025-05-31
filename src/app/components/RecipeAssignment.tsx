@@ -8,9 +8,10 @@ interface RecipeAssignmentProps {
   prepDays: PrepDay[];
   onAssignRecipe: (recipeId: string, prepDayId: string) => void;
   onUnassignRecipe: (recipeId: string, prepDayId: string) => void;
+  onSwapRecipes: (sourceDayId: string, destDayId: string, sourceMealId: string, destMealId: string) => void;
 }
 
-export default function RecipeAssignment({ recipes, prepDays, onAssignRecipe, onUnassignRecipe }: RecipeAssignmentProps) {
+export default function RecipeAssignment({ recipes, prepDays, onAssignRecipe, onUnassignRecipe, onSwapRecipes }: RecipeAssignmentProps) {
   // Only show prep days and their assigned meals. No unassigned section.
   const [isDragging, setIsDragging] = useState(false);
 
@@ -28,19 +29,22 @@ export default function RecipeAssignment({ recipes, prepDays, onAssignRecipe, on
     const recipeId = result.draggableId;
     if (sourceId === destId) return;
 
-    const sourceIsPrepDay = true; // Only prep days now
-    const destIsPrepDay = true;
     const sourceRecipes = droppableRecipes[sourceId];
+    const destRecipes = droppableRecipes[destId];
 
-    // Prevent removing the last meal from a prep day (only for removals)
-    if (sourceIsPrepDay) {
-      if (sourceRecipes.length === 1 && sourceRecipes[0] === recipeId) {
-        // Don't allow removing the last meal
-        return;
-      }
+    // SWAP LOGIC: If source has only one meal, swap with the first meal in dest
+    if (sourceRecipes.length === 1 && destRecipes.length >= 1) {
+      onSwapRecipes(sourceId, destId, sourceRecipes[0], destRecipes[0]);
+      return;
     }
 
-    // Normal move (move meal chip between prep days)
+    // Prevent removing the last meal from a prep day (only for removals)
+    if (sourceRecipes.length === 1 && sourceRecipes[0] === recipeId) {
+      // Don't allow removing the last meal
+      return;
+    }
+
+    // Normal move
     onUnassignRecipe(recipeId, sourceId);
     onAssignRecipe(recipeId, destId);
   }
