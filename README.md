@@ -7,14 +7,18 @@
 
 A modern, interactive meal prep planner built with [Next.js](https://nextjs.org), [Tailwind CSS](https://tailwindcss.com), and [TypeScript](https://www.typescriptlang.org/).
 
+![MealPrep Pro Landing Page](./landing-page.png)
+
 ## Features
 
-- 📅 **Meal Rotation:** Visually organized, card-based weekly meal plan with easy-to-read ingredients and instructions.
-- 🛒 **Dynamic Grocery List:** Select meals to instantly generate a concise, monospace grocery list.
-- 🖱️ **Interactive UI:** Click meal cards to toggle them as active/inactive; the grocery list updates automatically.
-- 📱 **Responsive Design:** Looks great on desktop and mobile.
-- 💨 **Powered by Tailwind CSS:** Clean, modern, and easily customizable styles.
-- 🧑‍💻 **TypeScript-first:** Strong typing for all data and components.
+- 🏠 **Beautiful Landing Page:** Professional landing page showcasing the meal planning workflow
+- 📅 **Weekly Meal Planning:** Visual calendar showing your entire week of meal prep at a glance
+- 🥗 **Recipe Management:** Organized meal cards with ingredients, cooking times, and nutritional info
+- 🛒 **Smart Grocery Lists:** Auto-generated shopping lists based on selected meals
+- 🎯 **Prep Day System:** Organize recipes into efficient cooking sessions
+- 📱 **Responsive Design:** Optimized for desktop and mobile devices
+- 🖨️ **Print-Ready:** Export grocery lists and meal plans for offline use
+- ⚡ **Fast & Modern:** Built with Next.js 14, TypeScript, and Tailwind CSS
 
 ## Getting Started
 
@@ -36,12 +40,14 @@ A modern, interactive meal prep planner built with [Next.js](https://nextjs.org)
 
 ## Project Structure
 
-- `src/app/page.tsx` — Main page layout and logic
-- `src/app/components/RecipeCard.tsx` — Meal card component
-- `src/app/components/GroceryList.tsx` — Interactive grocery list sidebar
-- `src/data/meals.ts` — All meal and ingredient data
-- `src/types/meals.ts` — TypeScript types for recipes and ingredients
-- `src/app/globals.css` — Tailwind and global styles
+- `src/app/page.tsx` — Landing page with hero section and benefits
+- `src/app/app/page.tsx` — Main meal planning application
+- `src/app/components/RecipeCard.tsx` — Individual meal card component
+- `src/app/components/GroceryList.tsx` — Dynamic grocery list generator
+- `src/app/components/RecipeAssignment.tsx` — Modal for managing meal assignments
+- `src/data/meals.ts` — Recipe database with ingredients and instructions
+- `src/types/meals.ts` — TypeScript type definitions
+- `src/app/globals.css` — Global styles and Tailwind configuration
 
 ## Customization
 
